@@ -5,4 +5,6 @@ import CenterView from '../../../../storybook/utils/CenterView/CenterView';
 
 storiesOf('Input', module)
   .addDecorator(story => <CenterView>{story()}</CenterView>)
-  .add('default', () => <Input label="Primary Input" />);
+  .add('default', () => (
+    <Input label="Primary Input" testID={'input-test-id'} />
+  ));

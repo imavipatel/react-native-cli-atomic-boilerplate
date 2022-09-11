@@ -1,21 +1,42 @@
-import React from 'react';
+import React, {
+  forwardRef,
+  ForwardRefRenderFunction,
+  useImperativeHandle,
+  useRef,
+} from 'react';
 import { KeyboardTypeOptions, View } from 'react-native';
 
-import { TextInput, Label } from '../../atoms';
+import { TextInput, Label, TextInputReference } from '../../atoms';
 import { styles } from './Input.style';
 
 interface InputProps {
-  label: string;
+  label?: string;
   keyboardType?: KeyboardTypeOptions;
   secureTextEntry?: boolean;
   testID: string;
 }
 
-export const Input: React.FC<InputProps> = props => {
+export interface InputReference {
+  getValue: () => string;
+}
+
+const InputWithReference: ForwardRefRenderFunction<
+  InputReference,
+  InputProps
+> = (props, ref) => {
+  const inputReference = useRef<TextInputReference>(null);
+
+  useImperativeHandle(ref, () => ({
+    getValue: () => {
+      return inputReference?.current?.getValue() ?? '';
+    },
+  }));
+
   return (
     <View style={styles.inputContainer}>
       <Label>{props.label}</Label>
       <TextInput
+        ref={inputReference}
         placeholder={props.label}
         keyboardType={props.keyboardType}
         secureTextEntry={props.secureTextEntry}
@@ -25,6 +46,8 @@ export const Input: React.FC<InputProps> = props => {
   );
 };
 
-Input.defaultProps = {
-  label: 'Input Title',
-};
+// InputWithReference.defaultProps = {
+//   label: 'Input Title',
+// };
+
+export const Input = forwardRef(InputWithReference);

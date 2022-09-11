@@ -5,7 +5,7 @@ import { LoginForm, Footer, HeaderBox } from '../../organisms';
 import { styles } from './LoginTemplate.style';
 
 interface LoginTemplateProps {
-  onSubmitForm: () => void;
+  onSubmitForm: (email: string, password: string) => void;
   onClickLabel: () => void;
   title: string;
 }

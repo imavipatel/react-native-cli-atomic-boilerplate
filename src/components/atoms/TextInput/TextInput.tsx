@@ -1,4 +1,9 @@
-import React from 'react';
+import React, {
+  forwardRef,
+  ForwardRefRenderFunction,
+  useImperativeHandle,
+  useState,
+} from 'react';
 import {
   KeyboardTypeOptions,
   TextInput as ReactNativeTextInput,
@@ -12,10 +17,35 @@ interface TextInputProps {
   testID: string;
 }
 
-export const TextInput: React.FC<TextInputProps> = props => {
+interface TextInputProps {
+  placeholder?: string;
+  keyboardType?: KeyboardTypeOptions;
+  secureTextEntry?: boolean;
+  testID: string;
+}
+
+export interface TextInputReference {
+  getValue: () => string;
+}
+
+const TextInputWithReference: ForwardRefRenderFunction<
+  TextInputReference,
+  TextInputProps
+> = (props, ref) => {
+  const [value, setValue] = useState('');
+
+  const onChangeText = (_value: string) => {
+    setValue(_value);
+  };
+
+  useImperativeHandle(ref, () => ({
+    getValue: () => value,
+  }));
+
   return (
     <ReactNativeTextInput
       style={styles.input}
+      onChangeText={onChangeText}
       placeholder={props.placeholder}
       keyboardType={props.keyboardType}
       secureTextEntry={props.secureTextEntry}
@@ -23,3 +53,5 @@ export const TextInput: React.FC<TextInputProps> = props => {
     />
   );
 };
+
+export const TextInput = forwardRef(TextInputWithReference);

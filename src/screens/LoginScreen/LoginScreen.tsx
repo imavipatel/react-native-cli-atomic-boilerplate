@@ -11,7 +11,10 @@ export type LoginScreenProps = {};
 const LoginScreen: React.FC<LoginScreenProps> = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
-  const onSubmitLoginForm = () => {
+  const onSubmitLoginForm = (email: string, password: string) => {
+    console.log('Email: ', email);
+    console.log('Password: ', password);
+
     navigation.navigate(ScreenName.ProfileScreen, {
       id: 0,
       firstName: 'Jon',
