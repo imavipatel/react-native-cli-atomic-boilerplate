@@ -8,6 +8,8 @@ export const actions = {
   onPinTask: action('onPinTask'),
   onArchiveTask: action('onArchiveTask'),
 };
-storiesOf('TextInput', module)
+storiesOf('Atoms/TextInput', module)
   .addDecorator(story => <CenterView>{story()}</CenterView>)
-  .add('default', () => <TextInput placeholder="Primary TextInput" />);
+  .add('default', () => (
+    <TextInput placeholder="Primary TextInput" testID={'text-input-id'} />
+  ));

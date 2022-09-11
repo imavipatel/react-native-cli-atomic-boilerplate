@@ -8,6 +8,8 @@ export const actions = {
   onClick: action('onClick'),
 };
 
-storiesOf('Button', module)
+storiesOf('Atoms/Button', module)
   .addDecorator(story => <CenterView>{story()}</CenterView>)
-  .add('default', () => <Button text="Button Text" />);
+  .add('default', () => (
+    <Button text="Button Text" testID={'button-test-id'} />
+  ));
