@@ -8,6 +8,6 @@ export const actions = {
   onClick: action('onClick'),
 };
 
-storiesOf('Header', module)
+storiesOf('Molecules/Header', module)
   .addDecorator(story => <CenterView>{story()}</CenterView>)
   .add('default', () => <Header>Header Text</Header>);

@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react-native';
 import { LoginForm } from './LoginForm';
 import CenterView from '../../../../storybook/utils/CenterView/CenterView';
 
-storiesOf('LoginForm', module)
+storiesOf('Organisms/LoginForm', module)
   .addDecorator(story => <CenterView>{story()}</CenterView>)
   .add('default', () => (
     <LoginForm

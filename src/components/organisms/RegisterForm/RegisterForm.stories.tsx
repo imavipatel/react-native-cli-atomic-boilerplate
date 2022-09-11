@@ -3,12 +3,12 @@ import { storiesOf } from '@storybook/react-native';
 import { RegisterForm } from './RegisterForm';
 import CenterView from '../../../../storybook/utils/CenterView/CenterView';
 
-storiesOf('RegisterForm', module)
+storiesOf('Organisms/RegisterForm', module)
   .addDecorator(story => <CenterView>{story()}</CenterView>)
   .add('default', () => (
     <RegisterForm
       onPressLabel={() => {}}
-      onSubmit={() => {}}
+      onSubmitForm={() => {}}
       title={'Register Form title'}
     />
   ));
