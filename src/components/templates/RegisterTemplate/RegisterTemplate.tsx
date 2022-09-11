@@ -6,7 +6,7 @@ import { RegisterForm } from '../../organisms/RegisterForm/RegisterForm';
 import { styles } from './RegisterTemplate.style';
 
 interface RegisterTemplateProps {
-  onSubmitForm: () => void;
+  onSubmitForm: (name: string, email: string, password: string) => void;
   onPressLabel: () => void;
   title: string;
 }
@@ -18,7 +18,7 @@ export const RegisterTemplate: React.FC<RegisterTemplateProps> = props => (
       <HeaderBox>{props.title}</HeaderBox>
       <RegisterForm
         title={props.title}
-        onSubmit={props.onSubmitForm}
+        onSubmitForm={props.onSubmitForm}
         onPressLabel={props.onPressLabel}
       />
       <Footer />

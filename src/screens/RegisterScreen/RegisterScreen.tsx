@@ -11,7 +11,11 @@ type RegisterScreenProps = {};
 const RegisterScreen: React.FC<RegisterScreenProps> = ({}) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
-  const onSubmitLoginForm = () => {
+  const onSubmitForm = (name: string, email: string, password: string) => {
+    console.log('Name: ', name);
+    console.log('Email: ', email);
+    console.log('Password: ', password);
+
     navigation.navigate(ScreenName.ProfileScreen, {
       id: 0,
       firstName: 'Jon',
@@ -26,7 +30,7 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({}) => {
   return (
     <RegisterTemplate
       title="Register your account"
-      onSubmitForm={onSubmitLoginForm}
+      onSubmitForm={onSubmitForm}
       onPressLabel={onPressLabel}
     />
   );
