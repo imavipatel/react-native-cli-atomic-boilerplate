@@ -18,6 +18,9 @@ interface InputProps {
 
 export interface InputReference {
   getValue: () => string;
+  setValue: (value: string) => void;
+  focus: () => void;
+  blur: () => void;
 }
 
 const InputWithReference: ForwardRefRenderFunction<
@@ -27,8 +30,15 @@ const InputWithReference: ForwardRefRenderFunction<
   const inputReference = useRef<TextInputReference>(null);
 
   useImperativeHandle(ref, () => ({
-    getValue: () => {
-      return inputReference?.current?.getValue() ?? '';
+    getValue: () => inputReference?.current?.getValue() ?? '',
+    setValue: (value: string) => {
+      inputReference?.current?.setValue(value);
+    },
+    focus: () => {
+      inputReference?.current?.focus();
+    },
+    blur: () => {
+      inputReference?.current?.blur();
     },
   }));
 

@@ -1,3 +1,4 @@
+import { useFocusEffect } from '@react-navigation/native';
 import React, { useRef } from 'react';
 import { View } from 'react-native';
 
@@ -14,6 +15,16 @@ interface LoginFormProps {
 export const LoginForm: React.FC<LoginFormProps> = props => {
   const emailInputReference = useRef<InputReference>(null);
   const passwordInputReference = useRef<InputReference>(null);
+
+  useFocusEffect(() => {
+    resetForm();
+    emailInputReference.current?.focus();
+  });
+
+  const resetForm = () => {
+    emailInputReference.current?.setValue('');
+    passwordInputReference.current?.setValue('');
+  };
 
   const onSubmit = () => {
     const emailValue = emailInputReference.current?.getValue() ?? '';

@@ -2,6 +2,7 @@ import React, {
   forwardRef,
   ForwardRefRenderFunction,
   useImperativeHandle,
+  useRef,
   useState,
 } from 'react';
 import {
@@ -26,6 +27,9 @@ interface TextInputProps {
 
 export interface TextInputReference {
   getValue: () => string;
+  setValue: (value: string) => void;
+  focus: () => void;
+  blur: () => void;
 }
 
 const TextInputWithReference: ForwardRefRenderFunction<
@@ -33,6 +37,7 @@ const TextInputWithReference: ForwardRefRenderFunction<
   TextInputProps
 > = (props, ref) => {
   const [value, setValue] = useState('');
+  const inputReference = useRef<ReactNativeTextInput>(null);
 
   const onChangeText = (_value: string) => {
     setValue(_value);
@@ -40,16 +45,27 @@ const TextInputWithReference: ForwardRefRenderFunction<
 
   useImperativeHandle(ref, () => ({
     getValue: () => value,
+    setValue: (value: string) => {
+      setValue(value);
+    },
+    focus: () => {
+      inputReference?.current?.focus();
+    },
+    blur: () => {
+      inputReference?.current?.blur();
+    },
   }));
 
   return (
     <ReactNativeTextInput
+      ref={inputReference}
       style={styles.input}
       onChangeText={onChangeText}
       placeholder={props.placeholder}
       keyboardType={props.keyboardType}
       secureTextEntry={props.secureTextEntry}
       testID={props.testID}
+      value={value}
     />
   );
 };
