@@ -2,6 +2,7 @@
 
 exports[`TextInput should render correctly 1`] = `
 <TextInput
+  onChangeText={[Function]}
   placeholder="Primary Input"
   style={
     Object {
@@ -20,5 +21,6 @@ exports[`TextInput should render correctly 1`] = `
     }
   }
   testID="input"
+  value=""
 />
 `;
