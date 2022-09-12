@@ -21,6 +21,8 @@ export interface InputReference {
   setValue: (value: string) => void;
   focus: () => void;
   blur: () => void;
+  isFocused: () => boolean | undefined;
+  isBlured: () => boolean | undefined;
 }
 
 const InputWithReference: ForwardRefRenderFunction<
@@ -40,6 +42,8 @@ const InputWithReference: ForwardRefRenderFunction<
     blur: () => {
       inputReference?.current?.blur();
     },
+    isFocused: () => inputReference?.current?.isFocused(),
+    isBlured: () => inputReference?.current?.isBlured(),
   }));
 
   return (

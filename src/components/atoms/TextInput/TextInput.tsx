@@ -1,6 +1,7 @@
 import React, {
   forwardRef,
   ForwardRefRenderFunction,
+  useEffect,
   useImperativeHandle,
   useRef,
   useState,
@@ -30,6 +31,8 @@ export interface TextInputReference {
   setValue: (value: string) => void;
   focus: () => void;
   blur: () => void;
+  isFocused: () => boolean | undefined;
+  isBlured: () => boolean | undefined;
 }
 
 const TextInputWithReference: ForwardRefRenderFunction<
@@ -54,6 +57,8 @@ const TextInputWithReference: ForwardRefRenderFunction<
     blur: () => {
       inputReference?.current?.blur();
     },
+    isFocused: () => inputReference?.current?.isFocused(),
+    isBlured: () => !inputReference?.current?.isFocused(),
   }));
 
   return (
